@@ -1,6 +1,6 @@
 name: MobDisguisePVPControl
 main: pgDev.bukkit.MDPVPControl.MDPVPCMain
-version: 0.1
+version: 0.2
 author: PG Dev Team
 authors: [Devil Boy]
 description: You'll know who hurt you.
@@ -13,3 +13,6 @@ permissions:
     mdpvpcontrol.candisguiseattack:
         default: op
         description: Can attack others while disguised.
+    mdpvpcontrol.hidedisguisedeath:
+        default: op
+        description: Will not show a death message if killed while disguised.

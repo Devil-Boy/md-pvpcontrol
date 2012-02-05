@@ -8,6 +8,8 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class MDPVPListener implements Listener {
 	MDPVPCMain plugin;
@@ -45,6 +47,17 @@ public class MDPVPListener implements Listener {
 					MobDisguiseAPI.undisguisePlayer(defender);
 					defender.sendMessage(ChatColor.RED + "Your disguise was blown.");
 				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void deathCatcher(EntityDeathEvent e) {
+		if (e instanceof PlayerDeathEvent) {
+			PlayerDeathEvent event = (PlayerDeathEvent) e;
+			Player zombie = (Player) e.getEntity();
+			if (MobDisguiseAPI.isDisguised(zombie) && plugin.hasPermissions(zombie, "mdpvpcontrol.hidedisguisedeath")) {
+				event.setDeathMessage(null);
 			}
 		}
 	}
