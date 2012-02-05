@@ -5,3 +5,11 @@ author: PG Dev Team
 authors: [Devil Boy]
 description: You'll know who hurt you.
 depend: [MobDisguise]
+
+permissions:
+    mdpvpcontrol.nodamagedisguiseloss:
+        default: op
+        description: Does not lose disguise upon being damaged.
+    mdpvpcontrol.candisguiseattack:
+        default: op
+        description: Can attack others while disguised.
