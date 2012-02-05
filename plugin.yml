@@ -1,5 +1,5 @@
 name: MobDisguisePCPControl
-main: pgDev.bukkit.MDDragonSpin.MDPVPCMain
+main: pgDev.bukkit.MDPVPControl.MDPVPCMain
 version: 0.1
 author: PG Dev Team
 authors: [Devil Boy]
