@@ -1,12 +1,15 @@
 package pgDev.bukkit.MDPVPControl;
 
-import java.io.File;
+import me.desmin88.mobdisguise.api.MobDisguiseAPI;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import pgDev.bukkit.DisguiseCraft.DisguiseCraft;
+import pgDev.bukkit.DisguiseCraft.api.DisguiseCraftAPI;
 
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
@@ -22,19 +25,26 @@ public class MDPVPCMain extends JavaPlugin {
     static String pluginMainDir = "./plugins/CommandPointsMunificent";
     static String pluginConfigLocation = pluginMainDir + "/CPM.cfg";
     static String dbLocation = pluginMainDir + "/PartialPointDB.ini";
+    
+    // DisguiseCraft
+    DisguiseCraftAPI dcAPI;
 	
 	public void onEnable() {
 		// Check for the plugin directory (create if it does not exist)
+		/*
     	File pluginDir = new File(pluginMainDir);
 		if(!pluginDir.exists()) {
 			boolean dirCreation = pluginDir.mkdirs();
 			if (dirCreation) {
 				System.out.println("New MobDisguisePCPControl directory created!");
 			}
-		}
+		}*/
 		
 		// Setup Permissions
 		setupPermissions();
+		
+		// Setup DisguiseCraft
+		dcAPI = DisguiseCraft.getAPI();
 		
 		// Register Events
 		PluginManager pm = getServer().getPluginManager();
@@ -66,5 +76,22 @@ public class MDPVPCMain extends JavaPlugin {
         } else {
             return player.hasPermission(node);
         }
+    }
+    
+    // Dual System Methods
+    public boolean isDisguised(Player p) {
+    	if (dcAPI == null) {
+    		return MobDisguiseAPI.isDisguised(p);
+    	} else {
+    		return dcAPI.isDisguised(p);
+    	}
+    }
+    
+    public void unDisguise(Player p) {
+    	if (dcAPI == null) {
+    		MobDisguiseAPI.undisguisePlayer(p);
+    	} else {
+    		dcAPI.undisguisePlayer(p);
+    	}
     }
 }
