@@ -27,8 +27,9 @@ public class MDPVPCMain extends JavaPlugin {
     static String dbLocation = pluginMainDir + "/PartialPointDB.ini";
     
     // DisguiseCraft
-    DisguiseCraftAPI dcAPI;
+    DisguiseCraftAPI dcAPI = null;
 	
+	@SuppressWarnings("static-access")
 	public void onEnable() {
 		// Check for the plugin directory (create if it does not exist)
 		/*
@@ -44,7 +45,10 @@ public class MDPVPCMain extends JavaPlugin {
 		setupPermissions();
 		
 		// Setup DisguiseCraft
-		dcAPI = DisguiseCraft.getAPI();
+		Plugin dc = getServer().getPluginManager().getPlugin("DisguiseCraft");
+		if (dc != null) {
+			dcAPI = ((DisguiseCraft) dc).getAPI();
+		}
 		
 		// Register Events
 		PluginManager pm = getServer().getPluginManager();
