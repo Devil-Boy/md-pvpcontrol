@@ -1,18 +1,29 @@
 name: MobDisguisePVPControl
 main: pgDev.bukkit.MDPVPControl.MDPVPCMain
-version: 0.4
+version: 0.5
 author: PG Dev Team
 authors: [Devil Boy]
 description: You'll know who hurt you.
 softdepend: [MobDisguise, DisguiseCraft]
 
 permissions:
+    mdpvpcontrol.*:
+        default: op
+        description: Is not affected by this plugin
+        children:
+            mdpvpcontrol.nodamagedisguiseloss: true
+            mdpvpcontrol.candisguiseattack: true
+            mdpvpcontrol.hidedisguisedeath: true
+            mdpvpcontrol.noattackdisguiseloss: true
     mdpvpcontrol.nodamagedisguiseloss:
         default: op
         description: Does not lose disguise upon being damaged.
     mdpvpcontrol.candisguiseattack:
-        default: op
+        default: true
         description: Can attack others while disguised.
     mdpvpcontrol.hidedisguisedeath:
         default: op
         description: Will not show a death message if killed while disguised.
+    mdpvpcontrol.noattackdisguiseloss:
+        default: op
+        description: Does not lose disguise upon attacking.

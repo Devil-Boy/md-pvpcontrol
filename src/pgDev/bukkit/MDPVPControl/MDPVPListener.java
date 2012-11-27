@@ -24,16 +24,30 @@ public class MDPVPListener implements Listener {
 			// Disguised cannot attack
 			if (event.getDamager() instanceof Player) {
 				Player attacker = (Player) event.getDamager();
-				if (plugin.isDisguised(attacker)  && !plugin.hasPermissions(attacker, "mdpvpcontrol.candisguiseattack")) {
-					event.setCancelled(true);
-					attacker.sendMessage(ChatColor.RED + "You cannot attack while disguised!");
+				if (plugin.isDisguised(attacker)) {
+					if (plugin.hasPermissions(attacker, "mdpvpcontrol.candisguiseattack")) {
+						if (!plugin.hasPermissions(attacker, "mdpvpcontrol.noattackdisguiseloss")) {
+							plugin.unDisguise(attacker);
+							attacker.sendMessage(ChatColor.RED + "Your disguise was blown.");
+						}
+					} else {
+						event.setCancelled(true);
+						attacker.sendMessage(ChatColor.RED + "You cannot attack while disguised!");
+					}
 				}
 			} else if (event.getDamager() instanceof Projectile) {
 				if (((Projectile) event.getDamager()).getShooter() instanceof Player) {
 					Player attacker = (Player) ((Projectile) event.getDamager()).getShooter();
-					if (plugin.isDisguised(attacker) && !plugin.hasPermissions(attacker, "mdpvpcontrol.candisguiseattack")) {
-						event.setCancelled(true);
-						attacker.sendMessage(ChatColor.RED + "You cannot attack while disguised!");
+					if (plugin.isDisguised(attacker)) {
+						if (plugin.hasPermissions(attacker, "mdpvpcontrol.candisguiseattack")) {
+							if (!plugin.hasPermissions(attacker, "mdpvpcontrol.noattackdisguiseloss")) {
+								plugin.unDisguise(attacker);
+								attacker.sendMessage(ChatColor.RED + "Your disguise was blown.");
+							}
+						} else {
+							event.setCancelled(true);
+							attacker.sendMessage(ChatColor.RED + "You cannot attack while disguised!");
+						}
 					}
 				}
 			}
