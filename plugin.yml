@@ -1,10 +1,10 @@
 name: MobDisguisePVPControl
 main: pgDev.bukkit.MDPVPControl.MDPVPCMain
-version: 0.5
+version: 0.6
 author: PG Dev Team
 authors: [Devil Boy]
 description: You'll know who hurt you.
-softdepend: [MobDisguise, DisguiseCraft]
+softdepend: [DisguiseCraft]
 
 permissions:
     mdpvpcontrol.*:

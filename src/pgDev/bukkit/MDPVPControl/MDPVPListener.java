@@ -25,8 +25,8 @@ public class MDPVPListener implements Listener {
 			if (event.getDamager() instanceof Player) {
 				Player attacker = (Player) event.getDamager();
 				if (plugin.isDisguised(attacker)) {
-					if (plugin.hasPermissions(attacker, "mdpvpcontrol.candisguiseattack")) {
-						if (!plugin.hasPermissions(attacker, "mdpvpcontrol.noattackdisguiseloss")) {
+					if (attacker.hasPermission("mdpvpcontrol.candisguiseattack")) {
+						if (!attacker.hasPermission("mdpvpcontrol.noattackdisguiseloss")) {
 							plugin.unDisguise(attacker);
 							attacker.sendMessage(ChatColor.RED + "Your disguise was blown.");
 						}
@@ -39,8 +39,8 @@ public class MDPVPListener implements Listener {
 				if (((Projectile) event.getDamager()).getShooter() instanceof Player) {
 					Player attacker = (Player) ((Projectile) event.getDamager()).getShooter();
 					if (plugin.isDisguised(attacker)) {
-						if (plugin.hasPermissions(attacker, "mdpvpcontrol.candisguiseattack")) {
-							if (!plugin.hasPermissions(attacker, "mdpvpcontrol.noattackdisguiseloss")) {
+						if (attacker.hasPermission("mdpvpcontrol.candisguiseattack")) {
+							if (!attacker.hasPermission("mdpvpcontrol.noattackdisguiseloss")) {
 								plugin.unDisguise(attacker);
 								attacker.sendMessage(ChatColor.RED + "Your disguise was blown.");
 							}
@@ -55,7 +55,7 @@ public class MDPVPListener implements Listener {
 			// Disguised lose disguise
 			if (!event.isCancelled() && event.getEntity() instanceof Player) {
 				Player defender = (Player) event.getEntity();
-				if (plugin.isDisguised(defender) && !plugin.hasPermissions(defender, "mdpvpcontrol.nodamagedisguiseloss")) {
+				if (plugin.isDisguised(defender) && !defender.hasPermission("mdpvpcontrol.nodamagedisguiseloss")) {
 					plugin.unDisguise(defender);
 					defender.sendMessage(ChatColor.RED + "Your disguise was blown.");
 				}
@@ -68,7 +68,7 @@ public class MDPVPListener implements Listener {
 		if (e instanceof PlayerDeathEvent) {
 			PlayerDeathEvent event = (PlayerDeathEvent) e;
 			Player zombie = (Player) e.getEntity();
-			if (plugin.isDisguised(zombie) && plugin.hasPermissions(zombie, "mdpvpcontrol.hidedisguisedeath")) {
+			if (plugin.isDisguised(zombie) && zombie.hasPermission("mdpvpcontrol.hidedisguisedeath")) {
 				event.setDeathMessage(null);
 			}
 		}
